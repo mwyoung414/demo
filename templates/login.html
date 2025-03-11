@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/styles/styles.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form method="post">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <button id="signUpModalBtn">Sign-Up</button>
+    </div>
+
+    <div id="modalWrapper" class="modal-wrapper">
+        <div id="signupModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Sign Up</h2>
+                <form method="post" action="/signup/">
+                    <div class="form-group">
+                        <label for="new-username">Username:</label>
+                        <input type="text" id="new-username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">Password:</label>
+                        <input type="password" id="new-password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password:</label>
+                        <input type="password" id="confirm-password" name="confirm_password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <button type="submit">Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-deployment
+  labels:
+    app: demo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: demo
+  template:
+    metadata:
+      labels:
+        app: demo
+    spec:
+      containers:
+      - name: demo-flask
+        image: demo-flask
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5000
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+        env:
+        - name: db_root_password
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: db_password
+        - name: db_name
+          value: demo
+        - name: FLASK_RUN_HOST
+          value: "0.0.0.0"
+        - name: FLASK_RUN_PORT
+          value: "5000"
+
+
+  

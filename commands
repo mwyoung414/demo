@@ -1,0 +1,2 @@
+kubectl apply -f secrets.yaml
+kubectl apply -f pv.yaml

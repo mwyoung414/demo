@@ -1,0 +1,7 @@
+kubectl run -it --rm --image=mysql --restart=Never mysql-client -- mysql -h mysql -P 3306 -u root -ppassword
+
+minikube image load demo
+
+minikube service demo-flask
+
+minikube service mysql
