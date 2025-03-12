@@ -5,21 +5,15 @@ from flaskext.mysql import MySQL
 
 app = Flask(__name__)
 
-app.config["MYSQL_DATABASE_USER"] = "root"
-app.config["MYSQL_DATABASE_PASSWORD"] = os.getenv("db_root_password")
-app.config["MYSQL_DATABASE_DB"] = os.getenv("db_name")
-app.config["MYSQL_DATABASE_HOST"] = os.getenv("MYSQL_SERVICE_HOST")
-app.config["MYSQL_DATABASE_PORT"] = int(os.getenv("MYSQL_SERVICE_PORT"), 3306)
-
 
 mysql = MySQL()
 mysql.init_app(app)
 
-# app.config['MYSQL_DATABASE_HOST'] = 'mysql.default.svc.cluster.local'
-# app.config['MYSQL_DATABASE_PORT'] = 3306
-# app.config['MYSQL_DATABASE_USER'] = 'root'
-# app.config['MYSQL_DATABASE_PASSWORD'] = 'password'
-# app.config['MYSQL_DATABASE_DB'] = 'DEMO'
+app.config['MYSQL_DATABASE_HOST'] = 'mysql.default.svc.cluster.local'
+app.config['MYSQL_DATABASE_PORT'] = 3306
+app.config['MYSQL_DATABASE_USER'] = 'root'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'password'
+app.config['MYSQL_DATABASE_DB'] = 'DEMO'
 
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.jinja_env.auto_reload = True
@@ -50,13 +44,15 @@ def signup():
     email = request.form.get('email')
     data = (username, email, password)
     
-    # data_json = {
-    #     'username': username,
-    #     'password': password,
-    #     'email': email
-    # }
+    print(data)
+    data_json = {
+        'username': username,
+        'password': password,
+        'email': email
+    }
     
     if username and email and password and request.method == 'POST':
+        print('test')
         sql = "INSERT INTO USERS(USER_NAME, USER_EMAIL, USER_PASSWORD) VALUES(%s, %s, %s)"
         try:
             conn = mysql.connect()
